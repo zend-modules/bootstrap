@@ -1,0 +1,18 @@
+{
+    "name": "zend-modules/bootstrap",
+    "description": "Bootstrap module for ZF2",
+    "license": "BSD-3-Clause",
+    "require": {
+        "php": ">=5.3.23",
+        "zendframework/zend-navigation": "2.4.8",
+        "zendframework/zend-view": "2.4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bootstrap\\": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}
