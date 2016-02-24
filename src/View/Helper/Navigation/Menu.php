@@ -22,6 +22,7 @@ use Zend\View\Helper\Navigation\Menu as BaseMenu;
  */
 class Menu extends BaseMenu
 {
+    
     /**
      * Renders a normal menu (called from {@link renderMenu()})
      *
@@ -208,6 +209,13 @@ class Menu extends BaseMenu
         }
 
         $html  = '<' . $element . $this->htmlAttribs($attribs) . '>';
+        
+        // Icon
+        $icon = $page->get('icon');
+        if (!empty($icon)) {
+            $html .= '<i class="' . $icon . '"></i>';
+        }
+        
         $label = $this->translate($page->getLabel(), $page->getTextDomain());
         if ($escapeLabel === true) {
             /** @var \Zend\View\Helper\EscapeHtml $escaper */

@@ -10,17 +10,28 @@
 namespace Bootstrap;
 
 use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
-
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 
 class Module implements 
+    AutoloaderProviderInterface,
     ViewHelperProviderInterface
 {
+    public function getAutoloaderConfig()
+    {
+        return array(
+            'Zend\Loader\StandardAutoloader' => array(
+                'namespaces' => array(
+                    __NAMESPACE__ => __DIR__ . '/src',
+                ),
+            ),
+        );
+    }
+
     public function getViewHelperConfig()
     {
         return array(
-            'invokables' => array(
-                'bootstrapNavigation' => 'Bootstrap\View\Helper\Navigation',
+            'factories' => array(
+                'bootstrapNavigation' => 'Bootstrap\Service\NavigationViewHelperFactory',
             ),
         );
     }

@@ -9,7 +9,10 @@
 
 namespace Bootstrap\View\Helper\Navigation;
 
+use Zend\ServiceManager\Factory\InvokableFactory;
+use Zend\View\Helper\Navigation\Links;
 use Zend\View\Helper\Navigation\PluginManager as BasePluginManager;
+use Zend\View\Helper\Navigation\Sitemap;
 
 /**
  * Plugin manager implementation for bootstrap navigation helpers
@@ -21,14 +24,33 @@ use Zend\View\Helper\Navigation\PluginManager as BasePluginManager;
 class PluginManager extends BasePluginManager
 {
     /**
-     * Default set of helpers
+     * Default aliases
      *
-     * @var array
+     * @var string[]
      */
-    protected $invokableClasses = array(
-        'breadcrumbs' => 'Zend\View\Helper\Navigation\Breadcrumbs',
-        'links'       => 'Zend\View\Helper\Navigation\Links',
-        'menu'        => 'Bootstrap\View\Helper\Navigation\Menu',
-        'sitemap'     => 'Zend\View\Helper\Navigation\Sitemap',
-    );
+    protected $aliases = [
+        'breadcrumbs' => Breadcrumbs::class,
+        'links'       => Links::class,
+        'menu'        => Menu::class,
+        'sitemap'     => Sitemap::class,
+    ];
+    
+    /**
+     * Default factories
+     *
+     * @var string[]
+     */
+    protected $factories = [
+        Breadcrumbs::class => InvokableFactory::class,
+        Links::class       => InvokableFactory::class,
+        Menu::class        => InvokableFactory::class,
+        Sitemap::class     => InvokableFactory::class,
+    
+        // v2 canonical FQCNs
+    
+        'bootstrapviewhelpernavigationbreadcrumbs' => InvokableFactory::class,
+        'bootstrapviewhelpernavigationlinks'       => InvokableFactory::class,
+        'bootstrapviewhelpernavigationmenu'        => InvokableFactory::class,
+        'bootstrapviewhelpernavigationsitemap'     => InvokableFactory::class,
+    ];
 }
